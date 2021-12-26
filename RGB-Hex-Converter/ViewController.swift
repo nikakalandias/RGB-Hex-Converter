@@ -58,7 +58,6 @@ class ViewController: UIViewController {
     }
     
     
-    
     func convertRGBtoHEX() {
         
         if let redValue = UInt8(txtRed.text!) {
@@ -69,16 +68,47 @@ class ViewController: UIViewController {
                     let greenHex = String(format: "%2X", greenValue)
                     let blueHex = String(format: "%2X", blueValue)
                     
-                    lblResult.text = "HEX Color : #\(redHex) \(greenHex) \(blueHex)"
+                    lblResult.text = "HEX Color : #\(redHex)\(greenHex)\(blueHex)"
                     lblSelected.backgroundColor = UIColor(red: CGFloat(redValue)/255, green: CGFloat(greenValue)/255, blue: CGFloat(blueValue)/255, alpha: 1)
                     
                 }
             }
+            
+        }else {
+            
+            makeAlert()
         }
         
     }
     
     func convertHEXtoRGB() {
+        
+        if let redValue = UInt8(txtRed.text!, radix: 16) {
+            if let greenValue = UInt8(txtGreen.text!, radix: 16) {
+                if let blueValue = UInt8(txtBlue.text!, radix: 16) {
+                
+                
+                    lblResult.text = "RED : \(redValue) \n GREEN : \(greenValue) \n BLUE : \(blueValue)"
+                    lblSelected.backgroundColor = UIColor(red: CGFloat(redValue)/255, green: CGFloat(greenValue)/255, blue: CGFloat(blueValue)/255, alpha: 1)
+            }
+        }
+
+        }else {
+            
+            makeAlert()
+            
+        }
+        
+    }
+    
+    func makeAlert() {
+        
+        let alert = UIAlertController(title: "ERROR!", message: "Please make sure you entered correctly!", preferredStyle: UIAlertController.Style.alert)
+        let button = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        alert.addAction(button)
+        
+        self.present(alert, animated: true, completion: nil)
+
         
     }
     
